@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A simple, focused todo list." />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="todo-card" aria-labelledby="page-title">
+        <header class="app-header">
+          <div>
+            <p class="eyebrow">Daily focus</p>
+            <h1 id="page-title">Todo list</h1>
+            <p class="subtitle">Keep the important things moving.</p>
+          </div>
+          <div class="progress-badge" aria-label="Completed tasks">
+            <span id="completed-count">0</span>
+            <span>done</span>
+          </div>
+        </header>
+
+        <form id="todo-form" class="todo-form">
+          <label class="sr-only" for="todo-input">New task</label>
+          <input
+            id="todo-input"
+            name="title"
+            type="text"
+            maxlength="200"
+            placeholder="What needs to be done?"
+            autocomplete="off"
+            required
+          />
+          <button class="primary-button" type="submit">Add task</button>
+        </form>
+
+        <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
+
+        <div id="todo-list" class="todo-list" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state">
+          <span class="empty-icon" aria-hidden="true">✓</span>
+          <h2>Nothing on your list</h2>
+          <p>Add a task above to get started.</p>
+        </div>
+      </section>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

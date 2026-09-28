@@ -87,6 +87,7 @@ textarea {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.8rem;
   margin-bottom: 1.6rem;
 }
@@ -319,6 +320,7 @@ select:focus {
 
 .list-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
@@ -351,6 +353,7 @@ select:focus {
 }
 
 .text-button {
+  align-self: flex-end;
   padding: 0.35rem 0;
   border: 0;
   background: transparent;
@@ -608,6 +611,14 @@ select:focus {
     padding: 2.25rem;
   }
 
+  .list-header {
+    flex-direction: row;
+  }
+
+  .text-button {
+    align-self: auto;
+  }
+
   .form-options {
     grid-template-columns: 1.3fr 1fr 1fr 1fr;
   }
@@ -634,5 +645,15 @@ select:focus {
 
   .edit-options {
     grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .todo-form {
+    grid-template-columns: 1fr;
+  }
+
+  .todo-form > .primary-button {
+    width: 100%;
   }
 }

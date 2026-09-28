@@ -30,6 +30,7 @@ const CATEGORIES = [
 
 let todos = [];
 let searchTimer;
+let loadRequestId = 0;
 const filters = { status: "all", q: "", sort: "created" };
 
 function setStatus(message = "", kind = "") {
@@ -193,6 +194,7 @@ function renderTodos() {
 }
 
 async function loadTodos() {
+  const requestId = ++loadRequestId;
   const params = new URLSearchParams({
     status: filters.status,
     sort: filters.sort,
@@ -202,9 +204,16 @@ async function loadTodos() {
   }
 
   try {
-    todos = await requestJson(`/api/todos?${params.toString()}`);
+    const nextTodos = await requestJson(`/api/todos?${params.toString()}`);
+    if (requestId !== loadRequestId) {
+      return;
+    }
+    todos = nextTodos;
     renderTodos();
   } catch (error) {
+    if (requestId !== loadRequestId) {
+      return;
+    }
     setStatus(error.message);
   }
 }

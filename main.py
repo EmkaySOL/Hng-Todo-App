@@ -3,6 +3,7 @@ import sqlite3
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 
@@ -11,6 +12,7 @@ DATABASE_PATH = BASE_DIR / "todos.db"
 STATIC_DIR = BASE_DIR / "static"
 
 app = FastAPI(title="Todo App")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 class TodoCreate(BaseModel):

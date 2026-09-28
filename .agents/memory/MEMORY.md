@@ -1,0 +1,1 @@
+- [SQLite runtime files](sqlite-runtime-files.md) — never delete the live SQLite file; restart the process so startup schema initialization runs.

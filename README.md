@@ -30,10 +30,30 @@ The SQLite database is created as `todos.db` in the project directory on first s
 
 ## API
 
-- `GET /api/todos` — list todos
-- `POST /api/todos` — create a todo with `{ "title": "..." }`
-- `PUT /api/todos/{id}` — update a todo title and/or completion state
-- `DELETE /api/todos/{id}` — delete a todo
+- `GET /api/todos` — list todos. Optional query parameters:
+  - `status=all|active|completed`
+  - `category=Work|School|Personal|Other`
+  - `q=search text` — searches titles and notes
+  - `sort=due|priority|created`
+- `POST /api/todos` — create a todo with a title and optional `completed`, `notes`, `due_date`, `priority`, and `category`
+- `PUT /api/todos/{id}` — update any todo fields except its ID and creation timestamp
+- `DELETE /api/todos/{id}` — delete one todo
+- `DELETE /api/todos/completed` — clear all completed todos
+
+Priority values are `low`, `medium`, or `high`. Categories are `Work`, `School`, `Personal`, or `Other`. Due dates use `YYYY-MM-DD`.
+
+## Features
+
+- Add, edit, complete/uncomplete, and delete tasks without page reloads
+- Optional notes, due dates, priority tags, and categories
+- Overdue highlighting for active tasks whose due date has passed
+- All, Active, and Completed filters, plus live title/notes search
+- Sort by due date, priority, or creation date
+- Remaining-task counter and clear-completed action
+- Expandable task notes
+- Dark mode remembered in the browser with `localStorage`
+
+On startup, the app safely adds any missing v2 columns to the existing SQLite `todos` table with `ALTER TABLE`; it does not drop or replace the table.
 
 ## Deploy to Render
 

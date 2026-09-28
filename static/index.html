@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="A simple, focused todo list." />
     <title>Todo List</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
@@ -16,9 +17,14 @@
             <h1 id="page-title">Todo list</h1>
             <p class="subtitle">Keep the important things moving.</p>
           </div>
-          <div class="progress-badge" aria-label="Completed tasks">
-            <span id="completed-count">0</span>
-            <span>done</span>
+          <div class="header-actions">
+            <button id="theme-toggle" class="icon-button" type="button" aria-label="Enable dark mode">
+              <span aria-hidden="true">☾</span>
+            </button>
+            <div class="progress-badge" aria-label="Tasks left">
+              <strong id="remaining-count">0</strong>
+              <span>tasks left</span>
+            </div>
           </div>
         </header>
 
@@ -34,7 +40,60 @@
             required
           />
           <button class="primary-button" type="submit">Add task</button>
+          <div class="form-options">
+            <details class="notes-details">
+              <summary>Add notes</summary>
+              <label class="sr-only" for="todo-notes">Notes</label>
+              <textarea id="todo-notes" maxlength="2000" placeholder="Add an optional description"></textarea>
+            </details>
+            <label class="control-label" for="todo-due-date">
+              Due date
+              <input id="todo-due-date" type="date" />
+            </label>
+            <label class="control-label" for="todo-priority">
+              Priority
+              <select id="todo-priority">
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+              </select>
+            </label>
+            <label class="control-label" for="todo-category">
+              Category
+              <select id="todo-category">
+                <option value="Personal">Personal</option>
+                <option value="Work">Work</option>
+                <option value="School">School</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
         </form>
+
+        <div class="toolbar">
+          <label class="search-field">
+            <span class="sr-only">Search tasks</span>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="Search tasks and notes" autocomplete="off" />
+          </label>
+          <label class="sort-field" for="sort-select">
+            <span>Sort</span>
+            <select id="sort-select">
+              <option value="created">Date created</option>
+              <option value="due">Due date</option>
+              <option value="priority">Priority</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="list-header">
+          <div class="filter-tabs" role="tablist" aria-label="Task status">
+            <button class="filter-tab active" type="button" role="tab" aria-selected="true" data-status="all">All</button>
+            <button class="filter-tab" type="button" role="tab" aria-selected="false" data-status="active">Active</button>
+            <button class="filter-tab" type="button" role="tab" aria-selected="false" data-status="completed">Completed</button>
+          </div>
+          <button id="clear-completed" class="text-button" type="button">Clear completed</button>
+        </div>
 
         <p id="status-message" class="status-message" role="status" aria-live="polite"></p>
 

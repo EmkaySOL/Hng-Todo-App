@@ -1,1 +1,2 @@
 - [SQLite runtime files](sqlite-runtime-files.md) — never delete the live SQLite file; restart the process so startup schema initialization runs.
+- [GitHub connector access](github-connector-access.md) — use the connected GitHub proxy when shell remote authentication is unavailable.
